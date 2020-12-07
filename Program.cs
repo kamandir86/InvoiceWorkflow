@@ -20,16 +20,18 @@ namespace InvoiceWorkflow
             }
 
             var userChoice = Console.ReadKey();
+            InvoiceService invoiceService = new InvoiceService();
             switch (userChoice.KeyChar)
             {
                 case '1':
-                    AddNewInvoice()
+                    var keyInfo = invoiceService.AddNewInvoiceView(actionService);
+                    invoiceService.AddNewInvoice(keyInfo);
                     break;
                 case '2':
-                    RemoveInvoice();
+                    //RemoveInvoice();
                     break;
                 case '3':
-                    Report();
+                    //Report();
                     break;
                 default:
                     Console.WriteLine("Invalid input");
@@ -42,6 +44,10 @@ namespace InvoiceWorkflow
             actionService.AddNewAction(1, "Add new invoice", "Main");
             actionService.AddNewAction(2, "Remove invoice", "Main");
             actionService.AddNewAction(3, "Reports", "Main");
+
+            actionService.AddNewAction(1, "Cost", "InvoiceCategoryMenu");
+            actionService.AddNewAction(2, "Sales", "InvoiceCategoryMenu");
+            actionService.AddNewAction(3, "Reports", "InvoiceCategoryMenu");
             return actionService;
         }
     }
